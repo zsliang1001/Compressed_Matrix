@@ -33,9 +33,9 @@ bool Data_Into_Arry(int* arr_Prt, int Data, int Row, int Col, Matrix_Type Type) 
 		break;
 	case Diag_Col_Frist://对称列优先矩阵
 		if (Row >= Col)
-			k = ((Col - 1) * (2 * Order - Col + 2) / 2) + Row - Col;
+			k = ((Col - 1) * (2 * Order - Col + 2) / 2) + (Row - Col + 1) - 1;
 		else
-			k = ((Row - 1) * (2 * Order - Row + 2) / 2) + Col - Row;
+			k = ((Row - 1) * (2 * Order - Row + 2) / 2) + (Col - Row + 1) - 1;
 		break;
 	case Triag_Row_Frist://三角行优先矩阵
 		if (Row >= Col)
@@ -45,13 +45,15 @@ bool Data_Into_Arry(int* arr_Prt, int Data, int Row, int Col, Matrix_Type Type) 
 		break;
 	case Triag_Col_Frist://三角列优先矩阵
 		if (Row >= Col)
-			k = ((Col - 1) * (2 * Order - Col + 2) / 2) + Row - Col;
+			k = ((Col - 1) * (2 * Order - Col + 2) / 2) + (Row - Col + 1) - 1;
 		else
 			k = Order * (Order + 1) / 2;
 		break;
 	case Tridiag_Row_Frist://三对角行优先矩阵
+			k = (3 * (Row - 1) - 1) + (Col - Row + 2) - 1;
 		break;
 	case Tridiag_Col_Frist://三对角列优先矩阵
+			k = (3 * (Col - 1) - 1) + (Row - Col + 2) - 1;
 		break;
 	default:
 		return false;
@@ -82,12 +84,22 @@ bool Assecc_Data(int* arr_Prt, int& Data, int Row, int Col, Matrix_Type Type) {
 			k = ((Row - 1) * (2 * Order - Row + 2) / 2) + Col - Row;
 		break;
 	case Triag_Row_Frist://三角行优先矩阵
+		if (Row >= Col)
+			k = (Row * (Row - 1) / 2) + Col - 1;
+		else
+			k = Order * (Order + 1) / 2;
 		break;
 	case Triag_Col_Frist://三角列优先矩阵
+		if (Row >= Col)
+			k = ((Col - 1) * (2 * Order - Col + 2) / 2) + (Row - Col + 1) - 1;
+		else
+			k = Order * (Order + 1) / 2;
 		break;
 	case Tridiag_Row_Frist://三对角行优先矩阵
+			k = (3 * (Row - 1) - 1) + (Col - Row + 2) - 1;
 		break;
 	case Tridiag_Col_Frist://三对角列优先矩阵
+			k = (3 * (Col - 1) - 1) + (Row - Col + 2) - 1;
 		break;
 	default:
 		return false;
