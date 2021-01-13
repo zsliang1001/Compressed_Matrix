@@ -15,4 +15,12 @@ typedef enum {
 	Idle				= 6
 }Matrix_Type;
 
+typedef struct Node {
+	int Row, Col;
+	union {
+		int data;
+		struct Node* next;
+	}uni;
+	struct Node* right, *down;
+}SparMatrix_Node, *SparMatrix;
 
